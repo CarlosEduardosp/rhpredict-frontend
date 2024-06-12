@@ -18,39 +18,53 @@ export default {
       ever: '',
       experiencia: '',
       resposta_requisicao: '',
+      resultado: '',
     }
   },
   methods: {
     enviar_dados() {
-      this.resposta_requisicao = "Carregando resposta, Por Favor Aguarde um instante."
+      this.resposta_requisicao = ''
+      this.resultado = 'Aguarde Alguns Instantes, Sua Resposta Está Sendo Processada. Por estar hospedada em um servidor gratuito, a resposta pode demorar em média uns 50segundos.'
+      console.log('enviando...', this.enviar)
       this.enviando();
     },
     async enviando() {
-      
-      this.grau_estudo = parseInt(this.grau_estudo)    
-      this.ano_contratacao = parseInt(this.ano_contratacao)    
-      this.nivel_pagamento = parseInt(this.nivel_pagamento)    
-      this.idade = parseInt(this.idade)    
-      this.genero = parseInt(this.genero)    
-      this.ever = parseInt(this.ever)    
-      this.experiencia = parseInt(this.experiencia)  
 
-          
+      this.grau_estudo = parseInt(this.grau_estudo)
+      this.ano_contratacao = parseInt(this.ano_contratacao)
+      this.nivel_pagamento = parseInt(this.nivel_pagamento)
+      this.idade = parseInt(this.idade)
+      this.genero = parseInt(this.genero)
+      this.ever = parseInt(this.ever)
+      this.experiencia = parseInt(this.experiencia)
+
+
       try {
         // Realiza a requisição com os dados do formulário ou dados fixos para teste
         const data = await fazerRequisicaorhpredictPOST(
           this.grau_estudo, this.ano_contratacao, this.nivel_pagamento,
           this.idade, this.genero, this.ever, this.experiencia
-          
+
         );
 
         this.resposta_requisicao = data;
-        console.log(this.resposta_requisicao);
+
       } catch (error) {
         console.error('Erro ao iniciar:', error);
       }
 
 
+    },
+    limpar() {
+        this.idade = '',
+        this.ano_contratacao = '',
+        this.genero = '',
+        this.grau_estudo = '',
+        this.nivel_pagamento = '',
+        this.ever = '',
+        this.experiencia = '',
+        this.resposta_requisicao = '',
+        this.resultado = ''      
     }
   }
 }
@@ -100,7 +114,7 @@ export default {
 
       <label for="" class="dados">Grau de Estudo </label>
       <div class="bloco">
-        <div>          
+        <div>
           <label>
             <input class="input-genero" v-model="grau_estudo" type="radio" name="grau_estudo" value="0" required>
             Bacharel
@@ -137,16 +151,15 @@ export default {
       </div>
 
       <label class="dados">Ever Benched</label>
-      <p class="text">indicar se um funcionário já esteve em uma situação em que não tinha atribuições de trabalho por um período,
+      <p class="text">indicar se um funcionário já esteve em uma situação em que não tinha atribuições de trabalho por
+        um período,
         como estar em um banco de reservas, aguardando tarefas ou projetos para trabalhar.</p>
       <div class="bloco">
         <label>
-          <input class="input-alimentos_caloricos" v-model="ever" type="radio" name="ever"
-            value="0" required> Não
+          <input class="input-alimentos_caloricos" v-model="ever" type="radio" name="ever" value="0" required> Não
         </label>
         <label>
-          <input class="input-alimentos_caloricos" type="radio" v-model="ever" name="ever"
-            value="1" required> Sim
+          <input class="input-alimentos_caloricos" type="radio" v-model="ever" name="ever" value="1" required> Sim
         </label>
       </div>
 
@@ -154,18 +167,20 @@ export default {
       <p class="text">Experiência em Anos</p>
       <div class="bloco">
         <label>
-          <input class="input_exp" v-model="experiencia" type="number" name="experiencia" required> 
+          <input class="input_exp" v-model="experiencia" type="number" name="experiencia" required>
         </label>
-        
-      </div>         
 
-      <h4 class="resposta" v-show="resposta_requisicao">{{ resposta_requisicao }}</h4>
+      </div>
 
-      <button type="submit" >CADASTRAR</button>
+      <h4 class="resposta" v-show="this.resultado && !this.resposta_requisicao">{{ this.resultado}}</h4>
+      <h4 class="resposta" v-show="this.resposta_requisicao['success']">{{ this.resposta_requisicao['message'] }}</h4>
+      
+      <button type="submit">ENVIAR DADOS</button>
 
 
     </form>
 
+    <button class="limpar" @click="limpar" type="submit">LIMPAR DADOS</button>
   </div>
 </template>
 
@@ -185,7 +200,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 95%;
+  width: 100%;
 }
 
 .titulo {
@@ -202,7 +217,6 @@ export default {
 
 .menu {
   position: fixed;
-  width: 100%;
   z-index: 1;
 }
 
@@ -214,7 +228,7 @@ export default {
 }
 
 .text {
-  width: 80%;
+  width: 70%;
   text-align: center;
 }
 
@@ -230,6 +244,7 @@ export default {
   height: 1.5rem;
   margin: 0.5rem 0.5rem;
   border-radius: 5px;
+  text-align: center;
 }
 
 .input_idade {
@@ -238,6 +253,7 @@ export default {
   height: 1.5rem;
   margin: 0.5rem 0.5rem;
   border-radius: 5px;
+  text-align: center;
 }
 
 .input_exp {
@@ -246,6 +262,7 @@ export default {
   height: 1.5rem;
   margin: 0.5rem 0.5rem;
   border-radius: 5px;
+  text-align: center;
 }
 
 .input_altura {
@@ -300,7 +317,7 @@ export default {
   background-color: none;
   border-radius: 10px;
   padding: 1rem 0rem;
-  width: 100%;
+  width: 95%;
   font-weight: 300;
   font-size: 0.8rem;
   display: flex;
@@ -313,7 +330,7 @@ export default {
 
 button {
   padding: 1rem;
-  width: 100%;
+  width: 95%;
   border: none;
   border-radius: 10px;
   background-color: #1d3f2e;
@@ -329,5 +346,9 @@ button {
   text-align: center;
   font-size: 1rem;
   font-weight: 300;
+}
+
+.limpar {
+  width: 95%;
 }
 </style>

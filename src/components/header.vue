@@ -16,9 +16,9 @@ export default {
             <router-link class="item_menu" to="/">Home</router-link>
             <p class="item_menu">|</p>
             <router-link class="item_menu" to="/sobre">Sobre</router-link>
-            <a href="#"><img class="icone" src="../assets/imagens/instagram.png" alt=""></a>
-            <a href="#"><img class="icone" src="../assets/imagens/facebook.png" alt=""></a>
-            <a href="/"><img class="icone" src="../assets/imagens/whatsapp.png" alt=""></a>
+            <a href="https://www.instagram.com/kadu_spadilha/"><img class="icone" src="../assets/imagens/instagram.png" alt=""></a>
+            <a href="https://www.linkedin.com/in/carlos-eduardo-padilha-0a105040/"><img class="icone" src="../assets/imagens/linkedin.png" alt=""></a>
+            <a href="https://wa.me/qr/VLUWS67P35KPN1"><img class="icone" src="../assets/imagens/whatsapp.png" alt=""></a>
         </nav>
 
         <router-view />
@@ -46,7 +46,7 @@ export default {
 }
 
 .titulo {
-    font-size: 1.1rem;
+    font-size: 1.3rem;
     font-weight: bold;
     color: #3f4555;
     width: auto;
@@ -71,7 +71,7 @@ export default {
 }
 
 .logo {
-    width: 1.8rem;
+    width: 2.5rem;
     margin: 0px 0rem;
 }
 

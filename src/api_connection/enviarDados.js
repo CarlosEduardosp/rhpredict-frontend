@@ -2,20 +2,21 @@ import axios from 'axios';
 
 export async function fazerRequisicaorhpredictPOST(
     grau_estudo, ano_contratacao, nivel_pagamento,
-          idade, genero, ever, experiencia
+    idade, genero, ever, experiencia
 ) {
     // URL da API 
     const apiUrl = 'https://rhpredict.onrender.com/inserir_dados';
+    //const apiUrl = 'https://rhpredict-backend-github.onrender.com/inserir_dados';
 
     // Criando um objeto com os dados para a requisição
     const dados = {
-        grau_estudo,
-        ano_contratacao,
-        nivel_pagamento,
-        idade,
-        genero,
-        ever,
-        experiencia
+            "grau_de_instrucao": grau_estudo,
+            "ano_de_adesao": ano_contratacao,
+            "nivel_de_pagamento": nivel_pagamento,
+            "idade": idade,
+            "genero": genero,
+            "everbench": ever,
+            "experiencia_no_dominio_atual": experiencia
     };
 
     try {
@@ -37,3 +38,4 @@ export async function fazerRequisicaorhpredictPOST(
         throw error; // Lança o erro novamente para tratamento posterior, se necessário
     }
 }
+
