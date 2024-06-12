@@ -95,7 +95,7 @@ export default {
 .menu {
   position: fixed;
   z-index: 1;
-  padding: 10px;
+  padding: 0px;
 }
 
 .bloco {

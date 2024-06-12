@@ -228,7 +228,7 @@ export default {
 }
 
 .text {
-  width: 70%;
+  width: 90%;
   text-align: center;
 }
 
